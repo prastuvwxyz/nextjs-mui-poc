@@ -91,7 +91,7 @@ export default function Header({ onMobileMenuClick }: HeaderProps) {
         sx={{
           justifyContent: 'space-between',
           minHeight: { xs: 56, sm: 64 }, // Ensure consistent height
-          paddingLeft: { xs: 1, sm: 3 },
+          paddingLeft: { xs: 3, sm: 3 },
           paddingRight: { xs: 1, sm: 3 },
         }}
       >
@@ -105,8 +105,8 @@ export default function Header({ onMobileMenuClick }: HeaderProps) {
               display: { xs: 'block', lg: 'none' },
               mr: 1,
               // Clean professional styling
-              minWidth: 40,
-              minHeight: 40,
+              minWidth: 44,
+              minHeight: 44,
               padding: 1,
               color: 'text.primary',
               backgroundColor: 'transparent',
@@ -119,7 +119,7 @@ export default function Header({ onMobileMenuClick }: HeaderProps) {
               },
               // Ensure icon visibility on iOS Safari
               '& .MuiSvgIcon-root': {
-                fontSize: '1.25rem',
+                fontSize: '1.50rem',
                 color: 'text.primary',
                 opacity: 1,
                 visibility: 'visible',
@@ -131,7 +131,7 @@ export default function Header({ onMobileMenuClick }: HeaderProps) {
             <MenuIcon
               sx={{
                 color: 'text.primary',
-                fontSize: '1.25rem',
+                fontSize: '1.50rem',
                 opacity: 1,
                 visibility: 'visible',
               }}
@@ -158,7 +158,7 @@ export default function Header({ onMobileMenuClick }: HeaderProps) {
               minHeight: 44,
               color: 'text.primary',
               '& .MuiSvgIcon-root': {
-                fontSize: '1.25rem',
+                fontSize: '1.50rem',
                 color: 'text.primary',
               },
               '&:hover': {
