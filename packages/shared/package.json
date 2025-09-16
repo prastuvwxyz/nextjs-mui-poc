@@ -1,0 +1,30 @@
+{
+  "name": "@electrum/shared",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src/",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0",
+    "ramda": "^0.29.1",
+    "immer": "^10.0.3"
+  },
+  "devDependencies": {
+    "@types/ramda": "^0.29.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0"
+  }
+}
