@@ -73,28 +73,69 @@ export default function Header({ onMobileMenuClick }: HeaderProps) {
       sx={{
         width: {
           xs: '100%',
-          md: `calc(100% - ${DRAWER_WIDTH}px)`
+          lg: `calc(100% - ${DRAWER_WIDTH}px)`
         },
-        ml: { xs: 0, md: `${DRAWER_WIDTH}px` },
+        ml: { xs: 0, lg: `${DRAWER_WIDTH}px` },
         backgroundColor: 'background.paper',
         color: 'text.primary',
         boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)',
         borderBottom: '1px solid #e2e8f0',
+        // Fix for iPhone 14 Pro Safari/Chrome visibility
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+        top: 0,
+        left: 0,
+        right: 0,
       }}
     >
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
+      <Toolbar
+        sx={{
+          justifyContent: 'space-between',
+          minHeight: { xs: 56, sm: 64 }, // Ensure consistent height
+          paddingLeft: { xs: 1, sm: 3 },
+          paddingRight: { xs: 1, sm: 3 },
+        }}
+      >
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {/* Mobile menu button */}
+          {/* Mobile menu button - Enhanced for iPhone 14 Pro */}
           <IconButton
             color="inherit"
             edge="start"
             onClick={onMobileMenuClick}
             sx={{
-              display: { xs: 'block', md: 'none' },
+              display: { xs: 'block', lg: 'none' },
               mr: 1,
+              // Clean professional styling
+              minWidth: 40,
+              minHeight: 40,
+              padding: 1,
+              color: 'text.primary',
+              backgroundColor: 'transparent',
+              borderRadius: 1,
+              '&:hover': {
+                backgroundColor: 'action.hover',
+              },
+              '&:active': {
+                backgroundColor: 'action.selected',
+              },
+              // Ensure icon visibility on iOS Safari
+              '& .MuiSvgIcon-root': {
+                fontSize: '1.25rem',
+                color: 'text.primary',
+                opacity: 1,
+                visibility: 'visible',
+              }
             }}
+            aria-label="Open navigation menu"
+            data-testid="mobile-menu-button"
           >
-            <MenuIcon />
+            <MenuIcon
+              sx={{
+                color: 'text.primary',
+                fontSize: '1.25rem',
+                opacity: 1,
+                visibility: 'visible',
+              }}
+            />
           </IconButton>
         </Box>
 
@@ -109,14 +150,49 @@ export default function Header({ onMobileMenuClick }: HeaderProps) {
             />
           </Search>
 
-          <IconButton size="large" color="inherit">
+          <IconButton
+            size="large"
+            color="inherit"
+            sx={{
+              minWidth: 44,
+              minHeight: 44,
+              color: 'text.primary',
+              '& .MuiSvgIcon-root': {
+                fontSize: '1.25rem',
+                color: 'text.primary',
+              },
+              '&:hover': {
+                backgroundColor: 'action.hover',
+              }
+            }}
+            aria-label="Notifications"
+          >
             <Badge badgeContent={4} color="error">
               <NotificationsIcon />
             </Badge>
           </IconButton>
 
-          <IconButton size="large" color="inherit">
-            <Avatar sx={{ width: 32, height: 32 }}>
+          <IconButton
+            size="large"
+            color="inherit"
+            sx={{
+              minWidth: 44,
+              minHeight: 44,
+              color: 'text.primary',
+              '&:hover': {
+                backgroundColor: 'action.hover',
+              }
+            }}
+            aria-label="Account menu"
+          >
+            <Avatar
+              sx={{
+                width: 32,
+                height: 32,
+                backgroundColor: 'primary.main',
+                color: 'primary.contrastText',
+              }}
+            >
               <AccountIcon />
             </Avatar>
           </IconButton>

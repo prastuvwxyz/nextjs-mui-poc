@@ -224,7 +224,7 @@ export default function Sidebar({ currentPath = '', onNavigate, menuItems: custo
   );
 
   return (
-    <Box component="nav" sx={{ width: { md: DRAWER_WIDTH }, flexShrink: { md: 0 } }}>
+    <Box component="nav" sx={{ width: { lg: DRAWER_WIDTH }, flexShrink: { lg: 0 } }}>
       {/* Mobile drawer */}
       <Drawer
         variant="temporary"
@@ -234,12 +234,18 @@ export default function Sidebar({ currentPath = '', onNavigate, menuItems: custo
           keepMounted: true, // Better open performance on mobile
         }}
         sx={{
-          display: { xs: 'block', md: 'none' },
+          display: { xs: 'block', lg: 'none' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: DRAWER_WIDTH,
             backgroundColor: 'background.paper',
+            // Ensure sidebar appears above header on mobile
+            zIndex: (theme) => theme.zIndex.modal + 100,
           },
+          // Ensure backdrop appears properly
+          '& .MuiBackdrop-root': {
+            zIndex: (theme) => theme.zIndex.modal + 50,
+          }
         }}
       >
         {drawerContent}
@@ -249,7 +255,7 @@ export default function Sidebar({ currentPath = '', onNavigate, menuItems: custo
       <Drawer
         variant="permanent"
         sx={{
-          display: { xs: 'none', md: 'block' },
+          display: { xs: 'none', lg: 'block' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: DRAWER_WIDTH,
