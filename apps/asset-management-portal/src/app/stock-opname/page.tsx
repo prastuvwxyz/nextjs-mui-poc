@@ -598,12 +598,6 @@ export default function StockOpnamePage() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          mt: 3,
-          p: 2,
-          backgroundColor: 'grey.50',
-          borderRadius: 1,
-          border: '1px solid',
-          borderColor: 'divider'
         }}>
           <Typography variant="body2" color="text.secondary">
             {startIndex + 1}-{Math.min(endIndex, filteredData.length)} of {filteredData.length}

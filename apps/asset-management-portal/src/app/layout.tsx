@@ -18,43 +18,6 @@ export default function RootLayout({
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Add CSS immediately and ensure it persists across reloads
-  useEffect(() => {
-    const styleId = 'mobile-fixes-css';
-
-    // Function to apply styles
-    const applyStyles = () => {
-      // Remove existing style if it exists
-      const existingStyle = document.getElementById(styleId);
-      if (existingStyle) {
-        existingStyle.remove();
-      }
-    };
-
-    // Apply styles immediately
-    applyStyles();
-
-    // Also apply on window resize to handle Chrome DevTools responsive mode
-    const handleResize = () => {
-      setTimeout(applyStyles, 50); // Small delay to ensure DOM is ready
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Apply after a brief delay to ensure all components are mounted
-    const timeoutId = setTimeout(applyStyles, 100);
-
-    // Cleanup function
-    return () => {
-      const styleElement = document.getElementById(styleId);
-      if (styleElement) {
-        styleElement.remove();
-      }
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
   const handleNavigation = (path: string) => {
     router.push(path);
   };
@@ -94,11 +57,6 @@ export default function RootLayout({
             // Render dashboard layout with sidebar and header
             <Box sx={{
               display: 'flex',
-              height: '100vh',
-              // Fix for Chrome mobile dimensions viewport issues
-              minHeight: { xs: '100vh', md: 'auto' },
-              maxHeight: { xs: '100vh', md: 'none' },
-              overflow: 'hidden', // Prevent double scrollbars
             }}>
               <Sidebar
                 currentPath={pathname}
@@ -107,24 +65,16 @@ export default function RootLayout({
                 mobileOpen={mobileOpen}
                 onMobileClose={handleMobileClose}
               />
+              <Header onMobileMenuClick={handleMobileMenuClick} />
               <Box
                 component="main"
                 sx={{
                   flexGrow: 1,
                   p: { xs: 2, sm: 3 },
-                  pb: { xs: 6, sm: 3 },
-                  width: {
-                    xs: '100%',
-                    lg: `calc(100% - ${DRAWER_WIDTH}px)`
-                  },
                   mt: { xs: 7, sm: 8 },
-                  minWidth: 0,
-                  // Simplified scrolling - remove height constraints
-                  overflow: 'auto',
                   WebkitOverflowScrolling: 'touch',
                 }}
               >
-                <Header onMobileMenuClick={handleMobileMenuClick} />
                 {children}
               </Box>
             </Box>

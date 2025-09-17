@@ -80,11 +80,10 @@ export default function Header({ onMobileMenuClick }: HeaderProps) {
         color: 'text.primary',
         boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)',
         borderBottom: '1px solid #e2e8f0',
-        // Fix for iPhone 14 Pro Safari/Chrome visibility
-        zIndex: (theme) => theme.zIndex.drawer + 1,
         top: 0,
         left: 0,
         right: 0,
+        zIndex: (theme) => theme.zIndex.drawer + 1000,
       }}
     >
       <Toolbar
